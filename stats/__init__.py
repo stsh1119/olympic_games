@@ -1,9 +1,15 @@
-from .parse_input import parse_input
-from stats.utils import validate_input, get_from_db, build_chart
+from .utils import parse_input, validate_mandatory_parameters, build_chart
+from .db import query_db
 
 
 def stats():
+    """"Combines other functions to:
+    1. Get and validate CLI input
+    2. Check, that mandatory parameters weren't skipped
+    3. Query database, using previously validated data
+    4. Build charts
+    """
     input_data = parse_input()
-    data = validate_input(input_data)
-    query_result = get_from_db(data)
-    build_chart(query_result, data)
+    validated_dict = validate_mandatory_parameters(input_data)
+    db_data = query_db(validated_dict)
+    build_chart(db_data, validated_dict)
