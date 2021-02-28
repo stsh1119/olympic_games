@@ -28,7 +28,7 @@ def form_unique_athletes(teams):
             try:
                 year_of_birth = int(row[game_year_index]) - int(row[age_index])
             except ValueError:
-                year_of_birth = 'NULL'
+                year_of_birth = None
             team_id = teams[row[noc_team_index]]['id']
             try:
                 height = float(row[height_index])
